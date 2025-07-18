@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+  <meta charset="utf-8">
+  <title>數值設計簡報</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Reveal.js core CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/theme/white.css">
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- 自訂配色與字級 -->
+  <style>
+    body {
+      /* Subtle gradient background */
+      background: linear-gradient(135deg, #f0f4f8 0%, #e0e7ed 100%);
+    }
+    .reveal {
+      --r-background-color: transparent; /* Make reveal background transparent to show body gradient */
+    }
+    /* 強制覆寫 Reveal.js 標題顏色 */
+    .reveal .slides section h1 {
+      color: #388e3c !important;
+      font-weight: bold;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1); /* Subtle shadow for titles */
+    }
+    .reveal .slides section h2 {
+      color: #1e88e5;
+      margin-bottom: 0.2em;
+      display: flex; /* Enable flex for icon alignment */
+      align-items: center;
+      gap: 10px; /* Space between icon and text */
+    }
+    .subtitle {
+      font-size: 0.8em;
+      color: #757575;
+      margin-top: 0;
+      margin-bottom: 0.8em;
+    }
+    strong { color: #0d47a1; }
+    ul li, ol li { color: #263238; margin-bottom: 0.5em; }
+    ul li::marker, ol li::marker { color: #1e88e5; }
+    .highlight { 
+      color: #e91e63; 
+      font-weight: bold; 
+      background-color: rgba(255, 235, 59, 0.3); /* Soft highlight background */
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+    .tier1 { color: #2e7d32; font-weight: bold; }
+    .tier2 { color: #388e3c; }
+    .tier3 { color: #66bb6a; }
+    a { color: #1565c0; text-decoration: underline; }
+
+    /* Flowchart specific styles */
+    .flowchart-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 70%; /* Adjust height to fit slide content */
+      width: 100%;
+    }
+    .flowchart-text {
+      font-family: "Inter", sans-serif; /* Use Inter font */
+      font-size: 18px;
+      fill: #0d47a1;
+      text-anchor: middle;
+      alignment-baseline: middle;
+    }
+    .flowchart-subtext {
+      font-family: "Inter", sans-serif; /* Use Inter font */
+      font-size: 12px;
+      fill: #263238;
+      text-anchor: middle;
+      alignment-baseline: middle;
+    }
+    .flowchart-box {
+      fill: #e3f2fd;
+      stroke: #1e88e5;
+      stroke-width: 2;
+      rx: 10;
+      ry: 10;
+      box-shadow: 3px 3px 8px rgba(0,0,0,0.2); /* Added subtle shadow */
+    }
+    .flowchart-arrow {
+      stroke: #1e88e5;
+      stroke-width: 2;
+    }
+    /* Styles for Q&A questions */
+    .qa-question {
+      font-size: 1.1em; /* Slightly larger font for questions */
+      margin-bottom: 1em;
+      color: #0d47a1; /* Dark blue for questions */
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- Slide 1: 封面 -->
+      <section>
+        <h1>數值設計：從概念到成功的八個關鍵階段</h1>
+        <p><em>Internal Report</em></p>
+        <p>Pascal · 2025/07/14</p>
+      </section>
+
+      <!-- Slide 2: 人設與背景介紹 -->
+      <section>
+        <h2><i class="fas fa-user-tie"></i> 人設與背景介紹</h2>
+        <ul>
+          <li><strong>跨領域經歷</strong>：後端 Server、前端 Client、4 年日本遊戲企劃／UI/UX</li>
+          <li><strong>SERVER 團隊全鏈路視角</strong>：從業務邏輯到自動化測試、線上監控，一人多職</li>
+          <li><strong>數值比喻</strong>：產品＝輪廓；美術＝外貌；<span class="highlight">數值＝劇本與心跳</span></li>
+        </ul>
+      </section>
+
+      <!-- Slide 3: 致敬的專業態度 -->
+      <section>
+        <h2><i class="fas fa-handshake"></i> 「致敬」的專業態度</h2>
+        <ol>
+          <li><strong>核心思想</strong>：先「搞清每條規則的深層用意」，再考慮改動或創新</li>
+          <li><strong>常見卡關</strong>：未深究競品規則，數值設計或者開發頻繁返工</li>
+          <li><strong>結論</strong>：大廠有專業數學／心理團隊，尊重專業，避免資源浪費</li>
+        </ol>
+      </section>
+
+      <!-- Slide 4: 第二幕概覽 -->
+      <section>
+        <h2><i class="fas fa-cogs"></i> 第二幕：核心流程</h2>
+        <ul>
+          <li class="tier1"><strong>與產品最密切</strong>：階段 1</li>
+          <li class="tier2"><strong>小幅關聯</strong>：階段 2</li>
+          <li class="tier3"><strong>次密切</strong>：階段 7, 8</li>
+        </ul>
+      </section>
+
+      <!-- Slide 5: 1. 提案前的數值驗證 -->
+      <section>
+        <h2><i class="fas fa-chart-line"></i> 1. 提案前的數值驗證</h2>
+        <p class="subtitle">Pre-PRD Validation</p>
+        <ul>
+          <li><strong>目標</strong>：快速驗證核心玩法的商業與工程可行性</li>
+          <li><strong>行動</strong>：用 Excel 進行模型試算，檢查成本、RTP 等指標</li>
+          <li><strong>風險</strong>：若跳過，可能後期才發現數值調整困難，且因已深度開發，修正成本極高</li>
+        </ul>
+      </section>
+
+      <!-- Slide 5: 2. 開發初期的模擬器驗證 -->
+      <section>
+        <h2><i class="fas fa-laptop-code"></i> 2. 開發初期的模擬器驗證</h2>
+        <p class="subtitle">Early-Dev Simulation</p>
+        <ul>
+          <li><strong>目標</strong>：後端功能交付前再次驗證邏輯與公式</li>
+          <li><strong>行動</strong>：編寫輕量模擬器，模擬玩家策略，提前發現漏洞並產出數據</li>
+          <li><strong>風險</strong>：若跳過，後端交付後才發現邏輯錯誤，延誤修復時機</li>
+        </ul>
+      </section>
+
+      <!-- Slide 6: 3. 開發中期的數據比對 -->
+      <section>
+        <h2><i class="fas fa-exchange-alt"></i> 3. 開發中期的數據比對</h2>
+        <p class="subtitle">Mid-Dev Data Reconciliation</p>
+        <ul>
+          <li><strong>目標</strong>：確保模擬器輸出與伺服器統計一致</li>
+          <li><strong>行動</strong>：交叉比對後端報表與模擬器結果</li>
+          <li><strong>風險</strong>：跳過將導致結果不一致；雙向比對如同變形 Code Review，強化品質把關</li>
+        </ul>
+      </section>
+
+      <!-- Slide 7: 4. 全鏈路使用者體驗測試 -->
+      <section>
+        <h2><i class="fas fa-mobile-alt"></i> 4. 全鏈路使用者體驗測試</h2>
+        <p class="subtitle">E2E User Experience Test</p>
+        <ul>
+          <li><strong>目標</strong>：確保前端顯示與後端計算結果一致</li>
+          <li><strong>行動</strong>：使用自動化腳本模擬玩家操作，測試完整鏈路</li>
+          <li><strong>風險</strong>：若跳過，遊戲中可能出現數值不符狀況，影響使用者信任</li>
+        </ul>
+      </section>
+
+      <!-- Slide 8: 5. 數值模組獨立測試 -->
+      <section>
+        <h2><i class="fas fa-flask"></i> 5. 數值模組獨立測試</h2>
+        <p class="subtitle">Numerical Module Independent Testing</p>
+        <ul>
+          <li><strong>目標</strong>：確保核心計算模組的正確性與穩定性</li>
+          <li><strong>行動</strong>：將邏輯包裝為獨立模組，QA 進行邊界條件與異常測試</li>
+          <li><strong>風險</strong>：若跳過，改動後難以即時發現錯誤，增加營運風險</li>
+        </ul>
+      </section>
+
+      <!-- Slide 9: 6. 日誌檢查 -->
+      <section>
+        <h2><i class="fas fa-clipboard-list"></i> 6. 日誌檢查</h2>
+        <p class="subtitle">Log Integrity Check</p>
+        <ul>
+          <li><strong>目標</strong>：捕捉可能遺失的關鍵事件數據</li>
+          <li><strong>行動</strong>：核查伺服器日誌埋點，驗證與統計結果一致</li>
+          <li><strong>風險</strong>：若跳過，難以發現日誌遺失，影響後續分析</li>
+        </ul>
+      </section>
+
+      <!-- Slide 10: 7. 上線初期的 A/B 測試 -->
+      <section>
+        <h2><i class="fas fa-vial"></i> 7. 上線初期的 A/B 測試</h2>
+        <p class="subtitle">Post-Launch A/B Testing</p>
+        <ul>
+          <li><strong>目標</strong>：用真實市場數據做最優決策</li>
+          <li><strong>行動</strong>：同時上線多組方案，收集留存與轉化率指標</li>
+          <li><strong>價值</strong>：快速迭代，推廣效果最佳版本，支援高層決策</li>
+        </ul>
+      </section>
+
+      <!-- Slide 11: 8. 長期營運持續優化 -->
+      <section>
+        <h2><i class="fas fa-chart-pie"></i> 8. 長期營運持續優化</h2>
+        <p class="subtitle">Long-term Live-Ops Tuning</p>
+        <ul>
+          <li><strong>目標</strong>：保持產品長期健康與穩定成長</li>
+          <li><strong>行動</strong>：持續監控數據波動，微調收益曲線與活躍指標</li>
+          <li><strong>價值</strong>：防止失衡，確保指標穩定增長</li>
+        </ul>
+      </section>
+
+      <!-- Slide 12: 第三幕：實例講解與操作演示 -->
+      <section>
+        <h2><i class="fas fa-desktop"></i> 第三幕：實例講解與操作演示</h2>
+        <ul>
+          <li>展示數學模型總連結：<a href="https://drive.google.com/drive/u/0/folders/1z_dQ7hZrRF__biwQKKoiK2Ns7BLTxN6j" target="_blank">Math Models Folders</a></li>
+          <li>主要展示模型：<a href="https://drive.google.com/drive/folders/1fPEr6LmpDVS-NocdgUNpv9yc7g2EUHC8" target="_blank">LUCKY CASH Folder</a></li>
+          <li>Demo 網址：<a href="https://pascalhuang0611.github.io/lucky-cash-game/Demo.html" target="_blank">LUCKY CASH Demo</a></li>
+        </ul>
+      </section>
+
+      <!-- Slide 13: 核心參數的體感連結 -->
+      <section>
+        <h2><i class="fas fa-sliders-h"></i> 1) 核心參數的體感連結</h2>
+        <ul>
+          <li><strong>HIT RATE</strong>：決定玩家多久感受一次「中獎」</li>
+          <li><strong>WIN RATE</strong>：體感「贏多輸少」還是相反</li>
+          <li><strong>Free Game 觸發頻率</strong>：特色玩法體驗頻率</li>
+        </ul>
+      </section>
+
+      <!-- Slide 14: Excel → 模擬器 → DEMO 的連動 (Flowchart) -->
+      <section>
+        <h2><i class="fas fa-project-diagram"></i> 2) 從 Excel 到模擬器再到 DEMO 的連動</h2>
+        <p class="subtitle">自動化流程演示</p>
+        <div class="flowchart-container">
+          <svg viewBox="0 0 1000 200" style="width: 100%; height: 100%;">
+            <defs>
+              <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+                <polygon points="0 0, 10 3.5, 0 7" fill="#1e88e5" />
+              </marker>
+            </defs>
+
+            <!-- Boxes -->
+            <rect x="0" y="50" width="180" height="90" class="flowchart-box" />
+            <text x="90" y="95" class="flowchart-text">Excel</text>
+            <text x="90" y="120" class="flowchart-subtext">調整權重</text>
+
+            <rect x="205" y="50" width="180" height="90" class="flowchart-box" />
+            <text x="295" y="95" class="flowchart-text">JSON</text>
+            <text x="295" y="120" class="flowchart-subtext">Single Source of Truth</text>
+
+            <rect x="410" y="50" width="180" height="90" class="flowchart-box" />
+            <text x="500" y="95" class="flowchart-text">模擬器</text>
+            <text x="500" y="120" class="flowchart-subtext">讀取與計算</text>
+
+            <rect x="615" y="50" width="180" height="90" class="flowchart-box" />
+            <text x="705" y="95" class="flowchart-text">DEMO 網頁</text>
+            <text x="705" y="120" class="flowchart-subtext">實際體驗</text>
+
+            <rect x="820" y="50" width="180" height="90" class="flowchart-box" />
+            <text x="910" y="95" class="flowchart-text">交付給開發團隊</text>
+
+            <!-- Arrows -->
+            <line x1="180" y1="95" x2="205" y2="95" class="flowchart-arrow" marker-end="url(#arrowhead)" />
+            <line x1="385" y1="95" x2="410" y2="95" class="flowchart-arrow" marker-end="url(#arrowhead)" />
+            <line x1="590" y1="95" x2="615" y2="95" class="flowchart-arrow" marker-end="url(#arrowhead)" />
+            <line x1="795" y1="95" x2="820" y2="95" class="flowchart-arrow" marker-end="url(#arrowhead)" />
+          </svg>
+        </div>
+        <p class="highlight" style="text-align: center; margin-top: 20px;">此流程大幅縮短溝通與開發時間，快速調整數值</p>
+      </section>
+
+      <!-- Slide 15: 第四幕：Q&A -->
+      <section>
+        <h2><i class="fas fa-question-circle"></i> 第四幕：Q&A</h2>
+        <p>感謝觀看，歡迎提出任何問題與討論！</p>
+      </section>
+
+      <!-- New Slide 16: Q&A - Part 1 -->
+      <section>
+        <h2><i class="fas fa-question-circle"></i> Q&A - 問題與思考 (一)</h2>
+        <ul>
+          <li class="qa-question">1. 第六階段的日誌檢查被視為最終的把關，那麼，為什麼我們在前面仍需投入大量資源進行多個驗證環節，而不是將所有檢查工作都集中到最後一步呢？這樣做有什麼必要性？</li>
+          <li class="qa-question">2. 像 MINES 這類型的遊戲為例，假設所有玩家都選擇在第一關就領取獎金（CASH OUT），為何遊戲的 RTP (Return To Player) 仍能維持穩定，而不會『爆掉』呢？</li>
+        </ul>
+      </section>
+
+      <!-- New Slide 17: Q&A - Part 2 -->
+      <section>
+        <h2><i class="fas fa-question-circle"></i> Q&A - 問題與思考 (二)</h2>
+        <ul>
+          <li class="qa-question">3. 在數值設計的眾多關鍵指標中，如 RTP、CV、HITRATE 和 WINRATE，您認為哪一個是最為核心，必須絕對確保其準確無誤的指標？為什麼？</li>
+          <li class="qa-question">4. 在數值設計中，如果我們提高遊戲的「中獎率 (HITRATE)」，那麼遊戲的「波動率 (CV)」通常會如何變化？而這對玩家感受到的「贏錢率 (WINRATE)」又會產生什麼樣的影響？</li>
+        </ul>
+      </section>
+
+      <!-- New Slide 18: Q&A - Part 3 -->
+      <section>
+        <h2><i class="fas fa-question-circle"></i> Q&A - 問題與思考 (三)</h2>
+        <ul>
+          <li class="qa-question">5. 在遊戲的(RTP)固定且有限的前提下，若產品經理希望讓玩家感受到「有機會中大獎」的刺激感，那麼遊戲的「波動率 (CV)」應該是提高還是降低？</li>
+          <li class="qa-question">6. 綜合我們前面討論的內容，在遊戲的(RTP)固定且有限的前提下，是否有可能同時實現「高中獎率 (High HITRATE)」和「有機會中大獎」這兩個目標？如果可以，其背後的核心設計概念是什麼？</li>
+        </ul>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Reveal.js core JS -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({ hash: false, slideNumber: true, transition: 'slide' }); /* Added transition */
+  </script>
+</body>
+</html>
